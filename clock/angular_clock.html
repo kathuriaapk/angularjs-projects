@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+<body ng-app="myApp" ng-controller = "timeCtrl">
+<h1>{{clock.getHours() + ":" + clock.getMinutes() + ":" + clock.getSeconds()}}</h1>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script>
+    angular.module("myApp" , []).controller("timeCtrl" , function($scope,$interval) {
+        $interval(function() {
+        $scope.clock = new Date();
+        }, 100); 
+    });
+</script> 
+</body>
+</html>
