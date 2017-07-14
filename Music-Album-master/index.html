@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Music Album</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+		<script src="app.js"></script>
+	</head>
+
+<body ng-app="myApp" >
+    <div ng-controller="AlbumController">
+		
+		<h2>Choose Album</h2>
+		<select id = "mySelect" ng-model = "newelement" ng-click = "myFunc()">
+			<option value = "" selected disabled>Select Album</option>
+		    <option ng-repeat = "albums in checkalbum">{{albums}}</option>
+		</select>
+   
+	<h1>{{newelement}}</h1>
+	<br>
+	<div ng-show = "showit">
+	<table>
+		<tr>
+			<th>Song</th>
+			<th>Lyricist</th>
+			<th>Music Composer</th>
+			<th></th>
+		</tr>
+		<tr ng-repeat = "data in albumData" id = "songDetails">
+			<td><p ng-hide = "showmenot">{{data.songname}}</p><p><input type = "text" ng-show = "showme" id = "nameSong" ng-model = "data.songname"></p></td>
+			<td><p ng-hide = "showmenot">{{data.lyrics}}</p><p><input type = "text" ng-show = "showme" id = "nameLyrics" ng-model = "data.lyrics"/></p></td>
+			<td><p ng-hide = "showmenot">{{data.composer}}</p><p><input type = "text" ng-show = "showme" id = "nameComposer" ng-model = "data.composer"/></p></td>
+			<td></td>
+		</tr>
+	
+		<tr ng-show = "count">
+			<td><p><input type = "text"  id = "td1" placeholder = "Song Name" /></p></td>
+			<td><p><input type = "text"  id = "td2" placeholder = "Lyricist" /></p></td>
+			<td><p><input type = "text"  id = "td3" placeholder = "Composer Name" /></p></td>
+			<td><button ng-click = "addSong()">Add</button></td>
+		</tr>
+	</table>
+	<br>
+	<button ng-click = "count=1" id = "td4" onclick = "this.disabled = true;">Add Songs</button>
+	<input type = "button" id = "updateBtn" ng-click = "updateSong()" value = "Update Songs"/>
+	<input type = "button" id = "concludeBtn" ng-click = "conclude()" value = "OK" ng-show = "showme"/>
+	</div>
+
+<style>
+table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+</style>
+</body>
+</html>
