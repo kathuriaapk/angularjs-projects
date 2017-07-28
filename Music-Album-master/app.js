@@ -1,5 +1,5 @@
 var app = angular.module('myApp',[]);
-app.controller('AlbumController',function($scope) {
+app.controller('AlbumController',['$scope','Data',function($scope,Data) {
 	
 	$scope.checkalbum = Object.keys(myObject);
 	$scope.showit =false;
@@ -10,14 +10,8 @@ app.controller('AlbumController',function($scope) {
 		$scope.count = 0;
 		$scope.selection = document.getElementById("mySelect").selectedIndex;
 		$scope.albumData = myObject[$scope.checkalbum[$scope.selection - 1]];
-	
-		
-	
 		if($scope.selection == $scope.checkalbum.length) {
-		   
-			
 			$scope.newelement = prompt("Your new album");
-			
 			if($scope.newelement == "") {
 				alert("Value can't be Empty");
 			
@@ -40,25 +34,26 @@ app.controller('AlbumController',function($scope) {
 	};
        
    $scope.addSong = function() {
-		$scope.addedSong = document.getElementById("td1").value;
-			if($scope.addedSong == "") {
+   		var clock = new Date();
+   		var details = Data.date_time(clock);
+   			if($scope.addedSong == "") {
 				alert("Songname shouldn't be empty");
 			} else {
 				$scope.newele = $scope.checkalbum[$scope.selection - 1];
 				$scope.size = myObject[$scope.newele].length;
 	    
 				myObject[$scope.newele][$scope.size] = {
-					songname : document.getElementById("td1").value,
-					lyrics 	 : document.getElementById("td2").value,
-					composer : document.getElementById("td3").value
+					songname : $scope.td1,
+					lyrics 	 : $scope.td2,
+					composer : $scope.td3,
+					update   : details 
 				};
 		
 				$scope.myFunc();
 				$scope.count= 0;
-				document.getElementById("td1").value = "";
-				document.getElementById("td2").value = "";
-				document.getElementById("td3").value = "";
-				document.getElementById("td4").disabled = false;
+				$scope.td1 = "";
+				$scope.td2 = "";
+				$scope.td3 = "";
 			}
 	};
 	
@@ -72,8 +67,9 @@ app.controller('AlbumController',function($scope) {
 		$scope.showme = 0;
 		document.getElementById("updateBtn").style.display = 'inline';
 		$scope.myFunc();
+
 	};
-});
+}]);
 
 var myObject = {};  // denotes an Object is being created
 	myObject = 
@@ -81,14 +77,14 @@ var myObject = {};  // denotes an Object is being created
 		{
 			songname : "Sun Rha Hai",
 			lyrics	 : "Sandeep Nath",
-			composer : "Ankit Tiwari"
+			composer : "Ankit Tiwari",
 			
 		},
 		{
 			songname : "Tum Hi Ho",
 			lyrics	 : "Mithoon",
-			composer : "Mithoon"
-			
+			composer : "Mithoon",
+
 		}
 		], 
 	

@@ -5,6 +5,8 @@
 		<title>Music Album</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 		<script src="app.js"></script>
+		<script src="filters.js"></script>
+		<script src="services.js"></script>
 	</head>
 
 <body ng-app="myApp" >
@@ -26,17 +28,17 @@
 			<th>Music Composer</th>
 			<th></th>
 		</tr>
-		<tr ng-repeat = "data in albumData" id = "songDetails">
-			<td><p ng-hide = "showmenot">{{data.songname}}</p><p><input type = "text" ng-show = "showme" id = "nameSong" ng-model = "data.songname"></p></td>
+		<tr ng-repeat = "data in albumData | orderBy : 'songname'" id = "songDetails">
+			<td><p ng-hide = "showmenot">{{data.songname | uppercase | truncate}}</p><p>(Added on : {{data.update}})</p><p><input type = "text" ng-show = "showme" id = "nameSong" ng-model = "data.songname"></p></td>
 			<td><p ng-hide = "showmenot">{{data.lyrics}}</p><p><input type = "text" ng-show = "showme" id = "nameLyrics" ng-model = "data.lyrics"/></p></td>
 			<td><p ng-hide = "showmenot">{{data.composer}}</p><p><input type = "text" ng-show = "showme" id = "nameComposer" ng-model = "data.composer"/></p></td>
 			<td></td>
 		</tr>
 	
 		<tr ng-show = "count">
-			<td><p><input type = "text"  id = "td1" placeholder = "Song Name" /></p></td>
-			<td><p><input type = "text"  id = "td2" placeholder = "Lyricist" /></p></td>
-			<td><p><input type = "text"  id = "td3" placeholder = "Composer Name" /></p></td>
+			<td><p><input type = "text"  ng-model = "td1" placeholder = "Song Name" /></p></td>
+			<td><p><input type = "text"  ng-model = "td2" placeholder = "Lyricist" /></p></td>
+			<td><p><input type = "text"  ng-model = "td3" placeholder = "Composer Name" /></p></td>
 			<td><button ng-click = "addSong()">Add</button></td>
 		</tr>
 	</table>
